@@ -1,32 +1,26 @@
+#include<cassert>
 #include "sequence1.h"
 using namespace std;
 
 namespace main_savitch_3
 {
-  const size_type CAPACITY;
+  const sequence::size_type sequence::CAPACITY;
 
   sequence::sequence(){
     used=0;
   }
 
   void sequence:: start(){
-    assert(used!=0);
-    assert(used>30);
     current_index=0;
   }
 
   void sequence::advance(){
     assert(is_item()==true);
-    if(current_index==used-1){
-      return 0;
-    }
-    else{
-      current_index++;
-    }
+    current_index++;
   }
 
   void sequence::insert(const value_type& entry){
-    assert(size()<CAPACITY);
+    assert(size()<sequence::CAPACITY);
     if(is_item()==false){
       for(int i=used;i>0;i--){
 	data[i]=data[i-1];
@@ -38,14 +32,14 @@ namespace main_savitch_3
       for(int i=used;i>current_index;i--){
 	data[i]=data[i-1];
       }
-      data[cureent_index]=entry;
+      data[current_index]=entry;
       used++;
     }
   }
 
   void sequence::attach(const value_type& entry){
-    assert(size()<CAPACITY);
-    if(is_item==false){
+    assert(size()<sequence::CAPACITY);
+    if(is_item()==false){
       data[used]=entry;
       used++;
     }
@@ -58,7 +52,28 @@ namespace main_savitch_3
     }
   }
 
-  void sequence::remove_current()
+  void sequence::remove_current(){
+    assert(is_item()==true);
+    for(int i=current_index;i<used-1;i++){
+      data[i]=data[i+1];
+    }
+    used--;
+  }
+
+  sequence::size_type sequence::size() const{
+    return used;
+  }
+
+  bool sequence::is_item() const{
+    return (used!=0 && current_index<used);
+  }
+
+  sequence::value_type sequence::current() const{
+    assert(is_item());
+    return data[current_index];
+  }
+}
+    
     
       
   
