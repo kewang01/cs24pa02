@@ -1,0 +1,6 @@
+#include "sequence1.h"
+using namespace std;
+
+namespace main_savutch_3
+{
+  
